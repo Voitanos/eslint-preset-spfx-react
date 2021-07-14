@@ -1,6 +1,6 @@
 # ESLint SharePoint Framework (with React support) Preset
 
-[![npm @latest](https://img.shields.io/npm/v/@voitanos/eslint-preset-spfx-react/latest?style=flat-square)](https://www.npmjs.com/package/@voitanos/eslint-preset-spfx-react) [![npm @next](https://img.shields.io/npm/v/@voitanos/eslint-preset-spfx-react/next?style=flat-square)](https://www.npmjs.com/package/@voitanos/eslint-preset-spfx-react)
+[![npm @latest](https://img.shields.io/npm/v/@voitanos/eslint-preset-spfx-react/latest?style=flat-square)](https://www.npmjs.com/package/@voitanos/eslint-preset-spfx-react)
 
 [![Voitanos on Twitter](https://img.shields.io/badge/Twitter-%40voitanos-blue?style=flat-square)](https://www.twitterl.com/voitanos)
 
