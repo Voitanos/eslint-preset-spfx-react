@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "lib": ["esnext"],
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "allowJs": true,
+    "types": ["node"],
+    "jsx": "react"
+  },
+  "include": [
+    "scripts/*.ts"
+  ],
+  "exclude": [ "node_modules" ]
+}
