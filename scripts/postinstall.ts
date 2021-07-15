@@ -40,6 +40,7 @@ const projectPath = path.resolve(path.join(__dirname, paths.join('/')));
  * STEP 1: ESLINT CONFIG FILE
  *
  */
+console.log('');
 console.log('ESLINT PRESET POSTINSTALL STEP 1 of 4...')
 const CONFIG_FILENAME = 'eslint.json';
 console.log(`INFO: Adding ESLint configuration file to: ./config/${CONFIG_FILENAME}`);
@@ -57,12 +58,30 @@ if (fs.existsSync(configFilePath)) {
   // copy file in
   fs.copyFileSync(configTemplate, configFilePath);
 }
+const SPFX_RULES_FILENAME = 'eslint.spfx.json';
+console.log('');
+console.log(`INFO: Adding ESLint SPFx rules file to: ./config/${SPFX_RULES_FILENAME}`);
+
+const spfxRulesPath = path.resolve(path.join(projectPath, 'config', SPFX_RULES_FILENAME));
+// check if config file present
+if (fs.existsSync(spfxRulesPath)) {
+  console.log(`      .. ${SPFX_RULES_FILENAME} exists! No changes required.`);
+} else {
+  // doesn't exist, so copy it in
+  console.log(`INFO: ${SPFX_RULES_FILENAME} not found; creating it`);
+
+  // get path to sample file
+  const configTemplate = path.join(CURR_DIR, '..', 'resources', `${SPFX_RULES_FILENAME}`);
+  // copy file in
+  fs.copyFileSync(configTemplate, spfxRulesPath);
+}
 
 /**
  *
  * STEP 2: ESLINT IGNORE FILE
  *
  */
+console.log('');
 console.log('ESLINT PRESET POSTINSTALL STEP 2 of 4...')
 const IGNORE_FILENAME = '.eslintignore';
 console.log(`INFO: Adding ESLint ignore file to: ./${IGNORE_FILENAME}`);
@@ -86,6 +105,7 @@ if (fs.existsSync(ignoreFilePath)) {
  * STEP 3: UPDATE GULPFILE.JS WITH ESLINT TASK
  *
  */
+console.log('');
 console.log('ESLINT PRESET POSTINSTALL STEP 3 of 4...')
 console.log(`INFO: Updating gulpfile.js add eslint task`);
 
@@ -103,11 +123,12 @@ fs.writeFileSync(GULPFILE_FILEPATH, gulpFileData.replace(/build.initialize\(requ
  *
  * STEP 4: DELETE TSLINT.JSON
  *
- */
- console.log('ESLINT PRESET POSTINSTALL STEP 4 of 4...')
- console.log(`INFO: Deleting tslint.info unnecessary file`);
+*/
+console.log('');
+console.log('ESLINT PRESET POSTINSTALL STEP 4 of 4...')
+console.log(`INFO: Deleting tslint.info unnecessary file`);
 
- const TSLINT_FILEPATH = path.resolve(path.join(projectPath, 'tslint.json'));
+const TSLINT_FILEPATH = path.resolve(path.join(projectPath, 'tslint.json'));
 
- // delete file
- fs.unlinkSync(TSLINT_FILEPATH);
+// delete file
+fs.unlinkSync(TSLINT_FILEPATH);

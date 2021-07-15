@@ -1,6 +1,6 @@
 # ESLint SharePoint Framework (with React support) Preset
 
-[![npm @latest](https://img.shields.io/npm/v/@voitanos/eslint-preset-spfx-react/latest?style=flat-square)](https://www.npmjs.com/package/@voitanos/eslint-preset-spfx-react)
+[![npm @latest](https://img.shields.io/npm/v/@voitanos/eslint-preset-spfx-react/latest?style=flat-square)](https://www.npmjs.com/package/@voitanos/eslint-preset-spfx-react) [![npm @next](https://img.shields.io/npm/v/@voitanos/eslint-preset-spfx-react/next?style=flat-square)](https://www.npmjs.com/package/@voitanos/eslint-preset-spfx-react)
 
 [![Voitanos on Twitter](https://img.shields.io/badge/Twitter-%40voitanos-blue?style=flat-square)](https://www.twitterl.com/voitanos)
 
@@ -8,7 +8,7 @@ Update your SharePoint Framework v1.12.1+ project to replace the deprecated & ou
 
 This utility is based on our blog post: **[Get with the times & ditch TSLint in favor of ESLint in SharePoint Framework projects](https://www.voitanos.io/blog/spfx-replace-tslint-with-eslint)**.
 
-> **NOTE**: This preset does not contain any support for SPFx projects that utilize React.
+> **NOTE**: This preset contains support for SPFx projects that utilize React. See [@voitanos/eslint-preset](https://www.npmjs.com/package/@voitanos/eslint-preset-spfx) for the non-React React version of this preset.
 
 Installing this this preset in your SPFx project will do the following:
 
@@ -99,7 +99,7 @@ Using the information above, install the specific preset package:
 npm install @voitanos/eslint-preset-spfx-react@ts3.7 --save-dev --save-exact
 ```
 
-## Validating Installation
+## Validating installation
 
 To validate a successful install, try it out!
 
@@ -128,3 +128,13 @@ To validate a successful install, try it out!
     [16:27:33] ├── test-only
     [16:27:33] └── serve
     ```
+
+## ESLint rules & default SPFx linting rules
+
+Unlike a normal SPFx project, no SPFx-specific linting rules are applied in the ESLint config provided by this preset.
+
+However, the **./config/eslint.spfx.json** file added to your project by this preset contains all the ESLint rules that match the TSLint rules defined in the default SPFx project's **./tslint.json** config file.
+
+To use the SPFx ported TSLints with ESLint, uncomment the line in the `extends:[]` array within the **./config/eslint.json** file.
+
+*Refer to the comments in the **./config/eslint.json** configuration file added to your project for more information.*
