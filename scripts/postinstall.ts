@@ -117,7 +117,8 @@ const GULPDELTA_FILEPATH = path.join(CURR_DIR, '..', 'resources', 'gulpfile.delt
 const GULPDELTA_CONTENT = fs.readFileSync(GULPDELTA_FILEPATH, 'utf8');
 
 // update file contents
-fs.writeFileSync(GULPFILE_FILEPATH, gulpFileData.replace(/build.initialize\(require\('gulp'\)\);/g, GULPDELTA_CONTENT));
+if (!(gulpFileData.indexOf(GULPDELTA_CONTENT) >= 0)) fs.writeFileSync(GULPFILE_FILEPATH, gulpFileData.replace(/build.initialize\(require\('gulp'\)\);/g, GULPDELTA_CONTENT));
+else console.log(`Task already present! No changes required.`);
 
 /**
  *
@@ -132,3 +133,4 @@ const TSLINT_FILEPATH = path.resolve(path.join(projectPath, 'tslint.json'));
 
 // delete file
 if (fs.existsSync(TSLINT_FILEPATH)) fs.unlinkSync(TSLINT_FILEPATH);
+else console.log(`${TSLINT_FILEPATH} doesn't exist! No changes required.`);
