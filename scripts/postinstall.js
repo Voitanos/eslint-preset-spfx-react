@@ -37,55 +37,90 @@ var projectPath = path.resolve(path.join(__dirname, paths.join('/')));
  * STEP 1: ESLINT CONFIG FILE
  *
  */
+console.log('');
 console.log('ESLINT PRESET POSTINSTALL STEP 1 of 4...');
 var CONFIG_FILENAME = 'eslint.json';
 console.log("INFO: Adding ESLint configuration file to: ./config/" + CONFIG_FILENAME);
 var configFilePath = path.resolve(path.join(projectPath, 'config', CONFIG_FILENAME));
-// // check if config file present
-// if (fs.existsSync(configFilePath)) {
-//   console.log(`      .. ${CONFIG_FILENAME} exists! No changes required.`);
-// } else {
-//   // doesn't exist, so copy it in
-//   console.log(`INFO: ${CONFIG_FILENAME} not found; creating it`);
-//   // get path to sample file
-//   const configTemplate = path.join(CURR_DIR, '..', 'resources', `${CONFIG_FILENAME}`);
-//   // copy file in
-//   fs.copyFileSync(configTemplate, configFilePath);
-// }
+// check if config file present
+if (fs.existsSync(configFilePath)) {
+    console.log("      .. " + CONFIG_FILENAME + " exists! No changes required.");
+}
+else {
+    // doesn't exist, so copy it in
+    console.log("INFO: " + CONFIG_FILENAME + " not found; creating it");
+    // get path to sample file
+    var configTemplate = path.join(CURR_DIR, '..', 'resources', "" + CONFIG_FILENAME);
+    // copy file in
+    fs.copyFileSync(configTemplate, configFilePath);
+}
+var SPFX_RULES_FILENAME = 'eslint.spfx.json';
+console.log('');
+console.log("INFO: Adding ESLint SPFx rules file to: ./config/" + SPFX_RULES_FILENAME);
+var spfxRulesPath = path.resolve(path.join(projectPath, 'config', SPFX_RULES_FILENAME));
+// check if config file present
+if (fs.existsSync(spfxRulesPath)) {
+    console.log("      .. " + SPFX_RULES_FILENAME + " exists! No changes required.");
+}
+else {
+    // doesn't exist, so copy it in
+    console.log("INFO: " + SPFX_RULES_FILENAME + " not found; creating it");
+    // get path to sample file
+    var configTemplate = path.join(CURR_DIR, '..', 'resources', "" + SPFX_RULES_FILENAME);
+    // copy file in
+    fs.copyFileSync(configTemplate, spfxRulesPath);
+}
 /**
  *
  * STEP 2: ESLINT IGNORE FILE
  *
  */
+console.log('');
 console.log('ESLINT PRESET POSTINSTALL STEP 2 of 4...');
 var IGNORE_FILENAME = '.eslintignore';
 console.log("INFO: Adding ESLint ignore file to: ./" + IGNORE_FILENAME);
 var ignoreFilePath = path.resolve(path.join(projectPath, IGNORE_FILENAME));
 // check if file present
-// if (fs.existsSync(ignoreFilePath)) {
-//   console.log(`      .. ${IGNORE_FILENAME} exists! No changes required.`);
-// } else {
-//   // doesn't exist, so copy it in
-//   console.log(`INFO: ${IGNORE_FILENAME} not found; creating it`);
-//   // get path to sample file
-//   const configTemplate = path.join(CURR_DIR, '..', 'resources', IGNORE_FILENAME);
-//   // copy file in
-//   fs.copyFileSync(configTemplate, ignoreFilePath);
-// }
+if (fs.existsSync(ignoreFilePath)) {
+    console.log("      .. " + IGNORE_FILENAME + " exists! No changes required.");
+}
+else {
+    // doesn't exist, so copy it in
+    console.log("INFO: " + IGNORE_FILENAME + " not found; creating it");
+    // get path to sample file
+    var configTemplate = path.join(CURR_DIR, '..', 'resources', IGNORE_FILENAME);
+    // copy file in
+    fs.copyFileSync(configTemplate, ignoreFilePath);
+}
 /**
  *
  * STEP 3: UPDATE GULPFILE.JS WITH ESLINT TASK
  *
  */
+console.log('');
 console.log('ESLINT PRESET POSTINSTALL STEP 3 of 4...');
-var GULPFILE_FILENAME = 'gulpfile.js';
-console.log("INFO: Updating ./" + GULPFILE_FILENAME + " add eslint task");
-var gulpFileData = fs.readFileSync(GULPFILE_FILENAME, 'utf8');
+console.log("INFO: Updating gulpfile.js add eslint task");
+var GULPFILE_FILEPATH = path.resolve(path.join(projectPath, 'gulpfile.js'));
+var gulpFileData = fs.readFileSync(GULPFILE_FILEPATH, 'utf8');
 // read in all data from the template file
 var GULPDELTA_FILEPATH = path.join(CURR_DIR, '..', 'resources', 'gulpfile.delta.js');
 var GULPDELTA_CONTENT = fs.readFileSync(GULPDELTA_FILEPATH, 'utf8');
 // update file contents
-var result = gulpFileData.replace(/build.initialize\(require\('gulp'\)\);/g, GULPDELTA_CONTENT);
-console.log("new gulp file");
-console.log(result);
-fs.writeFileSync(GULPFILE_FILENAME, result);
+if (!(gulpFileData.indexOf(GULPDELTA_CONTENT) >= 0))
+    fs.writeFileSync(GULPFILE_FILEPATH, gulpFileData.replace(/build.initialize\(require\('gulp'\)\);/g, GULPDELTA_CONTENT));
+else
+    console.log("Task already present! No changes required.");
+/**
+ *
+ * STEP 4: DELETE TSLINT.JSON
+ *
+*/
+console.log('');
+console.log('ESLINT PRESET POSTINSTALL STEP 4 of 4...');
+console.log("INFO: Deleting tslint.info unnecessary file");
+var TSLINT_FILEPATH = path.resolve(path.join(projectPath, 'tslint.json'));
+// delete file
+if (fs.existsSync(TSLINT_FILEPATH))
+    fs.unlinkSync(TSLINT_FILEPATH);
+else
+    console.log(TSLINT_FILEPATH + " doesn't exist! No changes required.");
