@@ -131,4 +131,4 @@ console.log(`INFO: Deleting tslint.info unnecessary file`);
 const TSLINT_FILEPATH = path.resolve(path.join(projectPath, 'tslint.json'));
 
 // delete file
-fs.unlinkSync(TSLINT_FILEPATH);
+if (fs.existsSync(TSLINT_FILEPATH)) fs.unlinkSync(TSLINT_FILEPATH);
