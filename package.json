@@ -1,7 +1,7 @@
 {
   "name": "@voitanos/eslint-preset-spfx-react",
   "description": "Preset to swap out TSLint in favor of ESLint in SharePoint Framework (non-React) projects.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "scripts/update-gulpfile-eslint.js",
   "license": "MIT",
   "dependencies": {
