@@ -1,7 +1,6 @@
 const eslint = require('gulp-eslint');
 
 const updateGulpfile = (build: any): void => {
-  console.log('here');
 
   // create the subtask
   const eslintSubTask = build.subTask('eslint', function (gulp: any) {
