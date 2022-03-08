@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // bail on postinstall if this is a build
-if (process.env.IS_BUILD) {
+if (process.env.IS_BUILD || process.env.Build_BuildId) {
   console.log('skipping POSTINSTALL script');
   process.exit(0);
 }
@@ -131,4 +131,6 @@ console.log(`INFO: Deleting tslint.info unnecessary file`);
 const TSLINT_FILEPATH = path.resolve(path.join(projectPath, 'tslint.json'));
 
 // delete file
-fs.unlinkSync(TSLINT_FILEPATH);
+if (fs.existsSync(TSLINT_FILEPATH)) {
+  fs.unlinkSync(TSLINT_FILEPATH);
+}
